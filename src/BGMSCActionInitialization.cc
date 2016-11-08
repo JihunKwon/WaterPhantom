@@ -13,13 +13,13 @@ BGMSCActionInitialization::~BGMSCActionInitialization()
 
 void BGMSCActionInitialization::BuildForMaster() const
 {
-  //  SetUserAction(new BGMSCRunAction);
+    SetUserAction(new BGMSCRunAction);
 }
 
 void BGMSCActionInitialization::Build() const
 {
     SetUserAction(new BGMSCPrimaryGeneratorAction);
-//    SetUserAction(new BGMSCEventAction);
-//    SetUserAction(new BGMSCSteppingAction);
-//    SetUserAction(new BGMSCRunAction);
+    SetUserAction(new BGMSCEventAction);
+    SetUserAction(new BGMSCSteppingAction);
+    SetUserAction(new BGMSCRunAction);
 }

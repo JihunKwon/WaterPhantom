@@ -255,38 +255,36 @@ void G4IAEAphspWriter::UpdateHeaders()
 //================================================================
 void G4IAEAphspWriter::UserSteppingAction(const G4Step* aStep)
 {
-    postZ = aStep->GetPostStepPoint()->GetPosition();
-    preZ = aStep->GetPreStepPoint()->GetPosition();
-    G4double postZ = postR.z();
-    G4double preZ = preR.z();
+  postR = aStep->GetPostStepPoint()->GetPosition();
+  preR = aStep->GetPreStepPoint()->GetPosition();
+  G4double postZ = postR.z();
+  G4double preZ = preR.z();
 
-
-    G4int i = 0;
-    G4int size = theZStopVector->size();
-    G4double zStop = (*theZStopVector)[i];
-
-    if ((aStep->GetTrack()->GetVolume()->GetName() == "NanoPartPhys")&&
-        (aStep->IsLastStepInVolume()) && (i < size)&& (aStep->GetTrack()->GetParticleDefinition()->GetParticleName() == "e-"))
+  G4int i = 0;
+  G4int size = theZStopVector->size();
+  G4double zStop = (*theZStopVector)[i];
+  while (postZ <= zStop && i < size)
     {
+      if (preZ > zStop)
+    {
+      // Check that this track has not crossed the
+      // i-th plane before.
+      G4int trackID = aStep->GetTrack()->GetTrackID();
+      std::set<G4int>::iterator it;
+      it = (*thePassingTracksVector)[i]->find(trackID);
 
-        // Check that this track has not crossed the
-        // i-th plane before.
-        G4int trackID = aStep->GetTrack()->GetTrackID();
-        // G4cout << "TrackID is " << trackID << G4endl;
-        std::set<G4int>::iterator it;
-        it = (*thePassingTracksVector)[i]->find(trackID);
-
-        if ( it == (*thePassingTracksVector)[i]->end() )
+      if ( it == (*thePassingTracksVector)[i]->end() )
         {
-            // Not passed before, so store the particle.
-            StoreIAEAParticle(aStep, i);
-            (*theIncrNumberVector)[i] = 0; // reset this counter
+          // Not passed before, so store the particle.
+          StoreIAEAParticle(aStep, i);
+          (*theIncrNumberVector)[i] = 0; // reset this counter
 
-            (*thePassingTracksVector)[i]->insert(trackID);
+          (*thePassingTracksVector)[i]->insert(trackID);
         }
     }
-    i++;
-    zStop = (*theZStopVector)[i];
+      i++;
+      zStop = (*theZStopVector)[i];
+    }
 }
 
 
