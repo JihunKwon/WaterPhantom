@@ -1,6 +1,6 @@
-//#undef G4MULTITHREADED
+#undef G4MULTITHREADED
 
-//#undef G4VIS_USE
+#undef G4VIS_USE
 
 #include <cstdio>
 #include <ctime>
@@ -71,7 +71,7 @@ int main(int argc,char** argv)
     delete visManager;
 #endif
 
-//    runManager->BeamOn(5000);
+    runManager->BeamOn(5000);
 
     delete runManager;
     return 0;
