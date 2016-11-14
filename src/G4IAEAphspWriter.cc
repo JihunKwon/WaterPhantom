@@ -263,9 +263,9 @@ void G4IAEAphspWriter::UserSteppingAction(const G4Step* aStep)
   G4int i = 0;
   G4int size = theZStopVector->size();
   G4double zStop = (*theZStopVector)[i];
-  while (postZ <= zStop && i < size)
+  while (postZ >= zStop && i < size)
     {
-      if (preZ > zStop)
+      if (preZ < zStop)
     {
       // Check that this track has not crossed the
       // i-th plane before.
@@ -307,24 +307,25 @@ void G4IAEAphspWriter::StoreIAEAParticle(const G4Step* aStep, const G4int StopId
     G4double postZ = postR.z();
     G4double preZ = preR.z();
 
-    // Track weight
-    IAEA_Float wt = static_cast<IAEA_Float>(aTrack->GetWeight());
-
     // Position
-    G4double postX = postR.x();
-    G4double preX = preR.x();
-    G4double postY = postR.y();
-    G4double preY = preR.y();
+    G4double postX = postR.x()/10e6;
+    G4double preX = preR.x()/10e6;
+    G4double postY = postR.y()/10e6;
+    G4double preY = preR.y()/10e6;
 
+    // Calculates the points on the surface
     IAEA_Float x = static_cast<IAEA_Float>( (preX+(postX-preX)*(ZStop-preZ)/(postZ-preZ))/cm );
     IAEA_Float y = static_cast<IAEA_Float>( (preY+(postY-preY)*(ZStop-preZ)/(postZ-preZ))/cm );
     IAEA_Float z = static_cast<IAEA_Float>( ZStop/cm );
 
     // Momentum direction
     G4ThreeVector momDir = aStep->GetPreStepPoint()->GetMomentumDirection();
-    IAEA_Float u = static_cast<IAEA_Float>(momDir.x());
-    IAEA_Float v = static_cast<IAEA_Float>(momDir.y());
-    IAEA_Float w = static_cast<IAEA_Float>(momDir.z());
+    IAEA_Float u = static_cast<IAEA_Float>(0);
+    IAEA_Float v = static_cast<IAEA_Float>(0);
+    IAEA_Float w = static_cast<IAEA_Float>(1);
+
+    // Track weight
+    IAEA_Float wt = static_cast<IAEA_Float>(aTrack->GetWeight()*momDir.z());
 
     switch(PDGCode)
     {

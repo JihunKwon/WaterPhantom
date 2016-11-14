@@ -9,7 +9,14 @@
 
 void BGMSCSteppingAction::UserSteppingAction(const G4Step* aStep)
 {
-    G4IAEAphspWriter::GetInstance()->UserSteppingAction(aStep);
+
+    if (!aStep->GetTrack()->GetCreatorProcess()&&aStep->IsFirstStepInVolume())
+    {
+        G4cout << aStep->GetPreStepPoint()->GetMomentumDirection().z() << " "
+               << aStep->GetTrack()->GetMomentumDirection().z() << G4endl;
+        G4IAEAphspWriter::GetInstance()->UserSteppingAction(aStep);
+    }
+
 }
 
 
