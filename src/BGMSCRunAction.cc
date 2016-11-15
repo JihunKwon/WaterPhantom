@@ -25,7 +25,7 @@ void BGMSCRunAction::BeginOfRunAction(const G4Run* aRun)
 {
     G4cout << "### Run " << aRun->GetRunID() << " start." << G4endl;
     G4IAEAphspWriter* Writer = G4IAEAphspWriter::GetInstance();
-    Writer->SetZStop(-99*mm);
+    Writer->SetZStop(-199*mm);
     Writer->BeginOfRunAction(aRun);
 }
 

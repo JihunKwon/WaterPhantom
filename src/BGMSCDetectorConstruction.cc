@@ -65,6 +65,10 @@ G4VPhysicalVolume* BGMSCDetectorConstruction::Construct()
     G4LogicalVolume *phantomLogic = new G4LogicalVolume(phantomSolid, water, "PhantomLogic");
     G4VPhysicalVolume *phantomPhys = new G4PVPlacement(0, G4ThreeVector(0, 0, 0), phantomLogic, "phantomPhys", worldLogic, false, 0);
 
+//    G4Box* test = new G4Box("Phatom", 10*cm, 10*cm, 1*mm);
+//    G4LogicalVolume *testLogic = new G4LogicalVolume(test, water, "PhantomLogic");
+//    G4VPhysicalVolume *testPhys = new G4PVPlacement(0, G4ThreeVector(0, 0, -189*mm), testLogic, "phantomPhys", worldLogic, false, 0);
+
     G4double maxStep = 1*mm;
     fStepLimit = new G4UserLimits(maxStep);
     phantomLogic->SetUserLimits(fStepLimit);
