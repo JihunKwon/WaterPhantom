@@ -361,9 +361,9 @@ void G4IAEAphspWriter::StoreIAEAParticle(const G4Step* aStep, const G4int StopId
     IAEA_I32 extraInt = static_cast<IAEA_I32>((*theIncrNumberVector)[StopIdx]);
     IAEA_I32 nStat = extraInt;
 
-    std::ofstream outfile;
-    outfile.open("Write_Gold_Position.txt", std::ios_base::app);
-    outfile << x << " " << y << " " << z << "\n";
+//    std::ofstream outfile;
+//    outfile.open("Write_Gold_Position.txt", std::ios_base::app);
+//    outfile << x << " " << y << " " << z << "\n";
 
     // And finally store the particle following the IAEA routines
     iaea_write_particle(&sourceID, &nStat, &partType,

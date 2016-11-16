@@ -20,6 +20,8 @@ TARGET_LINK_LIBRARIES(BGMSC ${Geant4_LIBRARIES})
 
 set(BGMSC_SCRIPTS
     init_vis.mac
+    Varian_TrueBeam6MV_01.IAEAheader
+    Varian_TrueBeam6MV_01.IAEAphsp
 )
 
 foreach(_script ${BGMSC_SCRIPTS})
