@@ -71,7 +71,7 @@ int main(int argc,char** argv)
     delete visManager;
 #endif
 
-    runManager->BeamOn(30);
+    runManager->BeamOn(20);
 
     delete runManager;
     return 0;

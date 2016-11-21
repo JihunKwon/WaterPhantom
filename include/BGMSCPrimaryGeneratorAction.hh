@@ -7,6 +7,8 @@
 #include "G4ParticleGun.hh"
 #include "G4SingleParticleSource.hh"
 
+#include "G4IAEAphspReader.hh"
+
 class G4Event;
 
 class BGMSCPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
@@ -19,7 +21,8 @@ public:
     void GeneratePrimaries(G4Event* event);
 
 private:
-    G4SingleParticleSource* CircleSource;
+    //G4SingleParticleSource* CircleSource;
+    G4IAEAphspReader* IAEAReader;
 };
 
 #endif
