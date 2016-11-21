@@ -44,7 +44,4 @@ void BGMSCPrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
 {
     //CircleSource->GeneratePrimaryVertex(event);
     IAEAReader->GeneratePrimaryVertex(event);
-    std::vector<G4ThreeVector>* pos = IAEAReader->GetPositionVector();
-    G4ThreeVector position = (*pos)[0];
-    std::ofstream outfile;
 }

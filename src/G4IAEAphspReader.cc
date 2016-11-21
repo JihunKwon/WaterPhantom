@@ -540,6 +540,7 @@ void G4IAEAphspReader::ReadThisEvent()
       theCurrentParticle++;
       iaea_get_particle(&sourceRead, &nStat, &type, 
 			&E, &wt, &x, &y, &z, &u, &v, &w, extraFloats, extraInts);
+      nStat = 1; // Dirty hack to separate the particles. Otherwise Geant4 tries to read the whole phase space file.
       if (nStat == -1)
 	{
 	  G4Exception("G4IAEAphspReader::ReadThisEvent()",
